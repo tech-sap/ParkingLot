@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ParkingSystem {
 
-    private final int parkingLotCapacity;
+    private int parkingLotCapacity;
     ArrayList<Car> parkingSlots = new ArrayList<Car>();
     public ParkingSystem(int capacity) {
         parkingLotCapacity = capacity;
@@ -13,6 +13,7 @@ public class ParkingSystem {
     public boolean park(Car car) {
         if(isSlotAvailable()) {
             parkingSlots.add(car);
+            parkingLotCapacity--;
             return true;
         }
         return false;

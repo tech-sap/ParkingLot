@@ -15,4 +15,14 @@ public class ParkingSystemTest {
 
         assertThat(isParked, is(equalTo(true)));
     }
+
+    @Test
+    void shouldReturnNotParkedWhenNoParkingSlotsAreFree() {
+        ParkingSystem parkingSystem = new ParkingSystem(1);
+
+        boolean isParkedOne = parkingSystem.park(new Car());
+        boolean isParkedTwo = parkingSystem.park(new Car());
+
+        assertThat(isParkedTwo, is(equalTo(false)));
+    }
 }
