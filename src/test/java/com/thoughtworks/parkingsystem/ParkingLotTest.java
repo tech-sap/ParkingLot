@@ -6,10 +6,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-public class ParkingSystemTest {
+public class ParkingLotTest {
     @Test
-    void shouldReturnParkedWhenAllParkingSlotsAreFree() {
-        ParkingSystem parkingSystem = new ParkingSystem(10);
+    void shouldBeAbleToParkWhenAllParkingSlotsAreFree() {
+        ParkingLot parkingSystem = new ParkingLot(10);
 
         boolean isParked = parkingSystem.park(new Car());
 
@@ -17,8 +17,8 @@ public class ParkingSystemTest {
     }
 
     @Test
-    void shouldReturnNotParkedWhenNoParkingSlotsAreFree() {
-        ParkingSystem parkingSystem = new ParkingSystem(1);
+    void shouldNotBeAbleToParkWhenNoParkingSlotsAreFree() {
+        ParkingLot parkingSystem = new ParkingLot(1);
 
         boolean isParkedOne = parkingSystem.park(new Car());
         boolean isParkedTwo = parkingSystem.park(new Car());
@@ -27,8 +27,8 @@ public class ParkingSystemTest {
     }
 
     @Test
-    void shouldReturnNotParkedWhenTheSameCarIsParkAgain() {
-        ParkingSystem parkingSystem = new ParkingSystem(5);
+    void shouldNotBeAbleToParkWhenTheSameCarIsParkAgain() {
+        ParkingLot parkingSystem = new ParkingLot(5);
 
         Car car = new Car();
 
