@@ -9,9 +9,9 @@ import static org.hamcrest.Matchers.is;
 public class ParkingSystemTest {
     @Test
     void shouldReturnParkedWhenAllParkingSlotsAreFree() {
-        ParkingSystem parkingSystem = new ParkingSystem();
+        ParkingSystem parkingSystem = new ParkingSystem(10);
 
-        boolean isParked = parkingSystem.park();
+        boolean isParked = parkingSystem.park(new Car());
 
         assertThat(isParked, is(equalTo(true)));
     }

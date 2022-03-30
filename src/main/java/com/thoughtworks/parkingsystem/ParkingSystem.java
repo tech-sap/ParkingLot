@@ -1,20 +1,25 @@
 package com.thoughtworks.parkingsystem;
 
-public class ParkingSystem {
-    private int numberOfSlots = 5;
+import java.util.ArrayList;
 
-    public ParkingSystem() {
+public class ParkingSystem {
+
+    private final int parkingLotCapacity;
+    ArrayList<Car> parkingSlots = new ArrayList<Car>();
+    public ParkingSystem(int capacity) {
+        parkingLotCapacity = capacity;
     }
 
-    public boolean park() {
+    public boolean park(Car car) {
         if(isSlotAvailable()) {
+            parkingSlots.add(car);
             return true;
         }
         return false;
     }
 
     private boolean isSlotAvailable() {
-        if(numberOfSlots > 0) {
+        if(parkingLotCapacity > 0) {
             return true;
         }
         return false;
