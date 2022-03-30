@@ -1,14 +1,17 @@
 package com.thoughtworks.parkingsystem;
 
+import com.thoughtworks.exceptions.AlreadyParkedException;
+import com.thoughtworks.exceptions.ParkingLotFullException;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingLotTest {
     @Test
-    void shouldBeAbleToParkWhenAllParkingSlotsAreFree() {
+    void shouldBeAbleToParkWhenAllParkingSlotsAreFree() throws ParkingLotFullException, AlreadyParkedException {
         ParkingLot parkingSystem = new ParkingLot(10);
 
         boolean isParked = parkingSystem.park(new Car());
@@ -17,24 +20,25 @@ public class ParkingLotTest {
     }
 
     @Test
-    void shouldNotBeAbleToParkWhenNoParkingSlotsAreFree() {
+    void shouldNotBeAbleToParkWhenNoParkingSlotsAreFree() throws ParkingLotFullException, AlreadyParkedException {
         ParkingLot parkingSystem = new ParkingLot(1);
 
-        boolean isParkedOne = parkingSystem.park(new Car());
-        boolean isParkedTwo = parkingSystem.park(new Car());
+        parkingSystem.park(new Car());
 
-        assertThat(isParkedTwo, is(equalTo(false)));
+        assertThrows(ParkingLotFullException.class,() -> {
+            parkingSystem.park(new Car());
+        });
     }
 
     @Test
-    void shouldNotBeAbleToParkWhenTheSameCarIsParkAgain() {
+    void shouldNotBeAbleToParkWhenTheSameCarIsParkAgain() throws ParkingLotFullException, AlreadyParkedException {
         ParkingLot parkingSystem = new ParkingLot(5);
-
         Car car = new Car();
 
-        boolean isParked = parkingSystem.park(car);
-        isParked = parkingSystem.park(car);
+        parkingSystem.park(car);
 
-        assertThat(isParked, is(equalTo(false)));
+        assertThrows(AlreadyParkedException.class, () ->{
+            parkingSystem.park(car);
+        });
     }
 }
