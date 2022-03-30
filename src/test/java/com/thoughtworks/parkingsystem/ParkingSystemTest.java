@@ -25,4 +25,16 @@ public class ParkingSystemTest {
 
         assertThat(isParkedTwo, is(equalTo(false)));
     }
+
+    @Test
+    void shouldReturnNotParkedWhenTheSameCarIsParkAgain() {
+        ParkingSystem parkingSystem = new ParkingSystem(5);
+
+        Car car = new Car();
+
+        boolean isParked = parkingSystem.park(car);
+        isParked = parkingSystem.park(car);
+
+        assertThat(isParked, is(equalTo(false)));
+    }
 }

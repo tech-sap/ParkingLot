@@ -11,9 +11,16 @@ public class ParkingSystem {
     }
 
     public boolean park(Car car) {
-        if(isSlotAvailable()) {
+        if(isSlotAvailable() && isNotAlreadyParked(car)) {
             parkingSlots.add(car);
             parkingLotCapacity--;
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isNotAlreadyParked(Car car) {
+        if(!(parkingSlots.contains(car))){
             return true;
         }
         return false;
