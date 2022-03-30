@@ -7,18 +7,18 @@ import java.util.ArrayList;
 
 public class ParkingLot {
 
-    private final int parkingLotCapacity;
+    private final int capacity;
     ArrayList<Car> parkedCars = new ArrayList<Car>();
 
     public ParkingLot(int capacity) {
-        parkingLotCapacity = capacity;
+        this.capacity = capacity;
     }
 
     public boolean park(Car car) throws ParkingLotFullException, AlreadyParkedException {
-        if (!(isSlotAvailable())){
+        if (!(isSlotAvailable())) {
             throw new ParkingLotFullException("Parking Lot is full");
         }
-        if (!(isNotAlreadyParked(car))){
+        if (!(isNotAlreadyParked(car))) {
             throw new AlreadyParkedException("Car is already Parked");
         }
         parkedCars.add(car);
@@ -33,7 +33,7 @@ public class ParkingLot {
     }
 
     private boolean isSlotAvailable() {
-        if (parkingLotCapacity > parkedCars.size()) {
+        if (capacity > parkedCars.size()) {
             return true;
         }
         return false;
