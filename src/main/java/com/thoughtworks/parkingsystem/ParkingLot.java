@@ -35,4 +35,8 @@ public class ParkingLot {
     private boolean isSlotAvailable() {
         return capacity > parkedVehicles.size();
     }
+
+    public void unPark(Parkable vehicle) {
+        parkedVehicles.remove(vehicle);
+    }
 }
