@@ -2,6 +2,7 @@ package com.thoughtworks.parkingsystem;
 
 import com.thoughtworks.exceptions.AlreadyParkedException;
 import com.thoughtworks.exceptions.ParkingLotFullException;
+import com.thoughtworks.exceptions.VehicleNotParkedException;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,10 @@ public class ParkingLot {
         return capacity > parkedVehicles.size();
     }
 
-    public void unPark(Parkable vehicle) {
+    public void unPark(Parkable vehicle) throws VehicleNotParkedException {
+        if (!isParked(vehicle)) {
+            throw new VehicleNotParkedException("Vehicle not parked");
+        }
         parkedVehicles.remove(vehicle);
     }
 }
