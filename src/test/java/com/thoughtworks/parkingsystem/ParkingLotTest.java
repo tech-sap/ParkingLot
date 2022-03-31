@@ -44,11 +44,11 @@ public class ParkingLotTest {
     void shouldBeAbleToUnParkCarWhenCarIsParked() throws ParkingLotFullException, AlreadyParkedException, VehicleNotParkedException {
         ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
-
         parkingLot.park(car);
-        parkingLot.unPark(car);
-        boolean isParked = parkingLot.isParked(car);
 
+        parkingLot.unPark(car);
+
+        boolean isParked = parkingLot.isParked(car);
         assertThat(isParked, is(equalTo(false)));
     }
 
