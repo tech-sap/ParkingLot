@@ -14,7 +14,7 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    public boolean park(Car car) throws ParkingLotFullException, AlreadyParkedException {
+    public void park(Car car) throws ParkingLotFullException, AlreadyParkedException {
         if (!(isSlotAvailable())) {
             throw new ParkingLotFullException("Parking Lot is full");
         }
@@ -22,7 +22,13 @@ public class ParkingLot {
             throw new AlreadyParkedException("Car is already Parked");
         }
         parkedCars.add(car);
-        return true;
+    }
+
+    public boolean isParked(Car car) {
+        if (parkedCars.contains(car)) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isNotAlreadyParked(Car car) {

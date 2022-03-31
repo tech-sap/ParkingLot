@@ -13,8 +13,10 @@ public class ParkingLotTest {
     @Test
     void shouldBeAbleToParkWhenAllParkingSlotsAreFree() throws ParkingLotFullException, AlreadyParkedException {
         ParkingLot parkingSystem = new ParkingLot(10);
+        Car car = new Car();
 
-        boolean isParked = parkingSystem.park(new Car());
+        parkingSystem.park(car);
+        boolean isParked = parkingSystem.isParked(car);
 
         assertThat(isParked, is(equalTo(true)));
     }
