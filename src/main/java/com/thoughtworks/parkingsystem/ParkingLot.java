@@ -8,40 +8,31 @@ import java.util.ArrayList;
 public class ParkingLot {
 
     private final int capacity;
-    ArrayList<Car> parkedCars = new ArrayList<Car>();
+    ArrayList<Parkable> parkedVehicles = new ArrayList<>();
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
 
-    public void park(Car car) throws ParkingLotFullException, AlreadyParkedException {
+    public void park(Parkable vehicle) throws ParkingLotFullException, AlreadyParkedException {
         if (!(isSlotAvailable())) {
             throw new ParkingLotFullException("Parking Lot is full");
         }
-        if (!(isNotAlreadyParked(car))) {
-            throw new AlreadyParkedException("Car is already Parked");
+        if (!(isNotAlreadyParked(vehicle))) {
+            throw new AlreadyParkedException("Vehicle is already Parked");
         }
-        parkedCars.add(car);
+        parkedVehicles.add(vehicle);
     }
 
-    public boolean isParked(Car car) {
-        if (parkedCars.contains(car)) {
-            return true;
-        }
-        return false;
+    public boolean isParked(Parkable vehicle) {
+        return parkedVehicles.contains(vehicle);
     }
 
-    private boolean isNotAlreadyParked(Car car) {
-        if (!(parkedCars.contains(car))) {
-            return true;
-        }
-        return false;
+    private boolean isNotAlreadyParked(Parkable vehicle) {
+        return !(parkedVehicles.contains(vehicle));
     }
 
     private boolean isSlotAvailable() {
-        if (capacity > parkedCars.size()) {
-            return true;
-        }
-        return false;
+        return capacity > parkedVehicles.size();
     }
 }

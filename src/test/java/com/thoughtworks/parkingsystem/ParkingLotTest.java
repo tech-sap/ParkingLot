@@ -27,9 +27,7 @@ public class ParkingLotTest {
 
         parkingSystem.park(new Car());
 
-        assertThrows(ParkingLotFullException.class,() -> {
-            parkingSystem.park(new Car());
-        });
+        assertThrows(ParkingLotFullException.class, () -> parkingSystem.park(new Car()));
     }
 
     @Test
@@ -39,8 +37,6 @@ public class ParkingLotTest {
 
         parkingSystem.park(car);
 
-        assertThrows(AlreadyParkedException.class, () ->{
-            parkingSystem.park(car);
-        });
+        assertThrows(AlreadyParkedException.class, () -> parkingSystem.park(car));
     }
 }

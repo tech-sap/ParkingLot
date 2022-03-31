@@ -1,4 +1,5 @@
 package com.thoughtworks.parkingsystem;
 
-public class Car {
+public interface Parkable {
+
 }
