@@ -44,19 +44,72 @@ jobs:
 
       # # run tests!
       # - run: gradle test
-  test:
+  
+  test1:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
-      - checkout
-      - run:
-          name: "Test Cases for Parking Lot"
-          command: gradle test
+        - checkout
+        - run: gradle test --test ParkingLotTest.shouldBeAbleToParkWhenAllParkingSlotsAreFree
+
+  test2:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+        - checkout
+        - run: gradle test --test ParkingLotTest.shouldNotBeAbleToParkWhenNoParkingSlotsAreFree
+  
+  test3:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+        - checkout
+        - run: gradle test --test ParkingLotTest.shouldNotBeAbleToParkWhenTheSameCarIsParkAgain
+
+  test4:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+        - checkout
+        - run: gradle test --test ParkingLotTest.shouldBeAbleToUnParkCarWhenCarIsParked
+
+  test5:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+        - checkout
+        - run: gradle test --test ParkingLotTest.shouldNotBeAbleUnParkWhenCarNotAlreadyParked
+
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo Successfully deployed
+  
 
 workflows:
   ParkingLot:
     jobs:
       - build
-      - test:
+      - test1:
           requires:
             - build
+      - test2:
+          requires:
+            - build
+            - test1
+      - test3:
+          requires:
+            - build
+            - test2
+      - test4:
+          requires:
+              - build
+              - test3
+      - test5:
+          requires:
+              - build
+              - test4
+      - deploy:
+          requires:
+              - test5
