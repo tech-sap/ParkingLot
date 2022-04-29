@@ -97,19 +97,15 @@ workflows:
       - test2:
           requires:
             - build
-            - test1
       - test3:
           requires:
             - build
-            - test2
       - test4:
           requires:
               - build
-              - test3
       - test5:
           requires:
               - build
-              - test4
       - deploy:
           requires:
               - test5
