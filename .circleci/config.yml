@@ -50,35 +50,35 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
         - checkout
-        - run: gradle test --test ParkingLotTest.shouldBeAbleToParkWhenAllParkingSlotsAreFree
+        - run: gradle test --tests ParkingLotTest.shouldBeAbleToParkWhenAllParkingSlotsAreFree
 
   test2:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
         - checkout
-        - run: gradle test --test ParkingLotTest.shouldNotBeAbleToParkWhenNoParkingSlotsAreFree
+        - run: gradle test --tests ParkingLotTest.shouldNotBeAbleToParkWhenNoParkingSlotsAreFree
   
   test3:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
         - checkout
-        - run: gradle test --test ParkingLotTest.shouldNotBeAbleToParkWhenTheSameCarIsParkAgain
+        - run: gradle test --tests ParkingLotTest.shouldNotBeAbleToParkWhenTheSameCarIsParkAgain
 
   test4:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
         - checkout
-        - run: gradle test --test ParkingLotTest.shouldBeAbleToUnParkCarWhenCarIsParked
+        - run: gradle test --tests ParkingLotTest.shouldBeAbleToUnParkCarWhenCarIsParked
 
   test5:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
         - checkout
-        - run: gradle test --test ParkingLotTest.shouldNotBeAbleUnParkWhenCarNotAlreadyParked
+        - run: gradle test --tests ParkingLotTest.shouldNotBeAbleUnParkWhenCarNotAlreadyParked
 
   deploy:
     docker:
