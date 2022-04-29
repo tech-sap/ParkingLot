@@ -1,6 +1,6 @@
 # Java Gradle CircleCI 2.0 configuration file
 # See: https://circleci.com/docs/2.0/language-java/
-version: 2
+version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -42,9 +42,21 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      # run tests!
-      - run: gradle test
+      # # run tests!
+      # - run: gradle test
+  test:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - run:
+          name: "Test Cases for Parking Lot"
+          command: gradle test
 
-ParkingLot:
-  jobs:
-    - build
+workflows:
+  ParkingLot:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
